@@ -1,6 +1,11 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { FaTwitter, FaGithub } from "react-icons/fa";
+
+const birthName = "Mr_ozin";
+const twitterUrl = "https://mobile.twitter.com/mr_ozin";
+const gitHubUrl = "https://github.com/ryokryok/is_30_mr_ozin";
 
 const Home: NextPage = () => {
   return (
@@ -12,21 +17,19 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-4xl font-bold text-white">Mr_ozin</h1>
-        <div className="p-2">
-          <CountDownTimer />
-        </div>
-        <div className="p-4 text-xl text-blue-50">
-          <a
-            href="https://mobile.twitter.com/mr_ozin"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Twitter
-          </a>
-        </div>
+        <NameLogo name={birthName} />
+        <CountDownTimer />
+        <Links />
       </main>
     </div>
+  );
+};
+
+const NameLogo = ({ name }: { name: string }) => {
+  return (
+    <h1 className="bg-clip-text text-transparent text-4xl font-bold text-white bg-gradient-to-r from-pink-500  to-violet-500">
+      {name}
+    </h1>
   );
 };
 
@@ -59,11 +62,39 @@ const CountDownTimer = ({ isDebug = false }: { isDebug?: Boolean }) => {
     return () => {};
   }, [time]);
   return (
-    <div>
-      <p className="text-8xl text-gray-50">
-        {new Date(Math.abs(time)).toISOString().slice(11, 19)}
-      </p>
-      <p className="text-4xl text-gray-50">{is_30 ? "三十路" : "まだ20代"}</p>
+    <div className="p-2">
+      <div className="text-3xl text-gray-50">
+        {is_30 ? (
+          <>
+            <p>三十路になってから</p>
+            <p className="text-6xl text-gray-50 font-mono">
+              {new Date(Math.abs(time)).toISOString().slice(11, 19)}
+            </p>
+            <p>経過しました。</p>
+          </>
+        ) : (
+          <>
+            <p>20代の残り時間</p>
+            <p className="text-6xl text-gray-50 font-mono">
+              {new Date(Math.abs(time)).toISOString().slice(11, 19)}
+            </p>
+            <p>です</p>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const Links = () => {
+  return (
+    <div className="p-4 text-xl text-blue-50 flex justify-center justify-items-center	">
+      <a href={twitterUrl} target="_blank" rel="noreferrer" className="p-1">
+        <FaTwitter />
+      </a>
+      <a href={gitHubUrl} target="_blank" rel="noreferrer" className="p-1">
+        <FaGithub />
+      </a>
     </div>
   );
 };
