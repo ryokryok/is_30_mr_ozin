@@ -17,7 +17,11 @@ const Home: NextPage = () => {
           <CountDownTimer />
         </div>
         <div className="p-4 text-xl text-blue-50">
-          <a href="https://mobile.twitter.com/mr_ozin" target={"_blank"}>
+          <a
+            href="https://mobile.twitter.com/mr_ozin"
+            target="_blank"
+            rel="noreferrer"
+          >
             Twitter
           </a>
         </div>
