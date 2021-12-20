@@ -23,7 +23,8 @@ const Home: NextPage = () => {
         <meta property="og:description" content={siteDesc} />
         <meta property="og:url" content={siteUrl} />
         <meta property="og:image" content={siteImage} />
-        <meta name="twitter:card" content={siteImage} />
+        <meta name="twitter:card" content={"summary_large_image"} />
+        <meta name="twitter:creator" content="@Mr_ozin" />
       </Head>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
