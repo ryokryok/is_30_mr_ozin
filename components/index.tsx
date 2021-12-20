@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { IconContext } from "react-icons";
 import { FaTwitter, FaGithub } from "react-icons/fa";
 import { calcRemainingTime, formatTimeToString } from "../lib";
 
@@ -64,13 +65,16 @@ export const CountDownTimer = ({
 
 export const Links = () => {
   return (
-    <div className="p-4 text-xl text-blue-50 flex justify-center justify-items-center	">
-      <a href={twitterUrl} target="_blank" rel="noreferrer" className="p-1">
-        <FaTwitter />
-      </a>
-      <a href={gitHubUrl} target="_blank" rel="noreferrer" className="p-1">
-        <FaGithub />
-      </a>
-    </div>
+    <IconContext.Provider value={{ size: "2em" }}>
+      <div className="p-4 text-xl text-blue-50 flex justify-center justify-items-center">
+        <a href={twitterUrl} target="_blank" rel="noreferrer" className="p-1">
+          <FaTwitter />
+        </a>
+
+        <a href={gitHubUrl} target="_blank" rel="noreferrer" className="p-1">
+          <FaGithub />
+        </a>
+      </div>
+    </IconContext.Provider>
   );
 };
