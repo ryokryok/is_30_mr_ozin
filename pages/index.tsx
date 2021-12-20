@@ -6,8 +6,9 @@ const birthName = "Mr_ozin";
 const thirtiesBirthDay = "2021-12-20T00:00:00+09:00";
 const siteTitle = "Mr_ozin 三十路タイマー";
 const siteDesc = "Mr_ozin が三十路になってからの経過時間をカウントします";
-const siteImage =
-  "https://res.cloudinary.com/dvhazxdof/image/upload/v1640016035/birthday_site/og-image_lyx5wv.jpg";
+const siteImage = `https://res.cloudinary.com/dvhazxdof/image/upload/c_scale,w_1920/co_rgb:EEFF44,l_text:Verdana_150_bold:${encodeURIComponent(
+  "Mr_ozin\n三十路\nタイマー"
+)}/fl_layer_apply,g_west,x_50/birthday_site/og-image_lyx5wv.jpg`;
 const siteUrl = "https://is-30-mr-ozin.vercel.app/";
 const siteType = "website";
 
