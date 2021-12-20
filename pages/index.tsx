@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { FaTwitter, FaGithub } from "react-icons/fa";
 
 const birthName = "Mr_ozin";
+const ThirtiesBirthDay = "2021-12-20T00:00:00+09:00";
 const twitterUrl = "https://mobile.twitter.com/mr_ozin";
 const gitHubUrl = "https://github.com/ryokryok/is_30_mr_ozin";
 
@@ -27,13 +28,12 @@ const Home: NextPage = () => {
 
 const NameLogo = ({ name }: { name: string }) => {
   return (
-    <h1 className="bg-clip-text text-transparent text-4xl font-bold text-white bg-gradient-to-r from-pink-500  to-violet-500">
+    <h1 className="bg-clip-text text-transparent text-4xl font-bold bg-gradient-to-r from-pink-500  to-violet-500">
       {name}
     </h1>
   );
 };
 
-const ThirtiesBirthDay = "2021-12-20T00:00:00+09:00";
 function calcRemainingTime(isDebug: Boolean) {
   const presentTime = new Date().getTime();
   const birthDatTime = isDebug
@@ -51,15 +51,14 @@ const CountDownTimer = ({ isDebug = false }: { isDebug?: Boolean }) => {
     const id = setInterval(() => {
       setTime((time) => time - 1000);
     }, 1000);
-    return () => {
-      clearInterval(id);
-    };
-  }, []);
-  useEffect(() => {
+
     if (time <= 0) {
       setIs_30(true);
     }
-    return () => {};
+
+    return () => {
+      clearInterval(id);
+    };
   }, [time]);
   return (
     <div className="p-2">
