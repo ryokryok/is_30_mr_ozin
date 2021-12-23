@@ -28,7 +28,7 @@ const Home: NextPage = () => {
         <meta name="twitter:creator" content="@Mr_ozin" />
       </Head>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20">
+      <main className="flex flex-col items-center justify-center w-full flex-1 px-5 mb:px-10 lg:px-20">
         <CountDownTimer birthDayDate={thirtiesBirthDay} />
         <Links />
       </main>
