@@ -23,6 +23,7 @@ export function formatTimeToString(ms: number) {
   return date === 0 ? hmsText : `${date}日${hmsText}`;
 }
 
+// https://bom-shibuya.hatenablog.com/entry/2020/10/27/182226
 export const useAnimationFrame = (callback: () => void) => {
   const requestRef = useRef<ReturnType<typeof requestAnimationFrame>>();
 
