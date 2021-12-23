@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { IconContext } from "react-icons";
 import { FaTwitter, FaGithub } from "react-icons/fa";
 import {
