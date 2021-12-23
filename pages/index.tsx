@@ -1,8 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { NameLogo, CountDownTimer, Links } from "../components";
+import { CountDownTimer, Links } from "../components";
 
-const birthName = "Mr_ozin";
 const thirtiesBirthDay = "2021-12-20T00:00:00+09:00";
 const siteTitle = "Mr_ozin 三十路タイマー";
 const siteDesc = "Mr_ozin が三十路になってからの経過時間をカウントします";
@@ -29,8 +28,7 @@ const Home: NextPage = () => {
         <meta name="twitter:creator" content="@Mr_ozin" />
       </Head>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <NameLogo name={birthName} />
+      <main className="flex flex-col items-center justify-center w-full flex-1 px-20">
         <CountDownTimer birthDayDate={thirtiesBirthDay} />
         <Links />
       </main>

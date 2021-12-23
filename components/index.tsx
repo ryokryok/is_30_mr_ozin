@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { IconContext } from "react-icons";
 import { FaTwitter, FaGithub } from "react-icons/fa";
-import { calcRemainingTime, formatTimeToString } from "../lib";
+import {
+  calcRemainingTime,
+  formatTimeToString,
+  useAnimationFrame,
+} from "../lib";
 
 const twitterUrl = "https://mobile.twitter.com/mr_ozin";
 const gitHubUrl = "https://github.com/ryokryok/is_30_mr_ozin";
@@ -24,42 +28,48 @@ export const CountDownTimer = ({
   const remainingTime = calcRemainingTime(isDebug, birthDayDate);
 
   const [time, setTime] = useState(remainingTime);
-  const [is_30, setIs_30] = useState(false);
-  useEffect(() => {
-    const id = setInterval(() => {
-      setTime((time) => time - 1000);
-    }, 1000);
-
-    if (time <= 0) {
-      setIs_30(true);
-    }
-
-    return () => {
-      clearInterval(id);
-    };
-  }, [time]);
+  const is30 = time <= 30;
+  useAnimationFrame(() => {
+    setTime(calcRemainingTime(isDebug, birthDayDate));
+  });
   return (
-    <div className="p-2">
-      <div className="text-3xl text-gray-50">
-        {is_30 ? (
+    <div className="p-2 w-full">
+      <div className="text-xl md:text-2xl lg:text-3xl text-gray-50">
+        <p>
+          おじんさん (
+          <a
+            href={twitterUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="p-1 text-blue-400"
+          >
+            @Mr_ozin
+          </a>
+          )が
+        </p>
+        {is30 ? (
           <>
             <p>三十路になってから</p>
-            <p className="text-6xl text-gray-50 font-mono">
-              {formatTimeToString(time)}
-            </p>
+            <TimeDisplay time={time} />
             <p>経過しました。</p>
           </>
         ) : (
           <>
             <p>20代の残り時間</p>
-            <p className="text-6xl text-gray-50 font-mono">
-              {formatTimeToString(time)}
-            </p>
+            <TimeDisplay time={time} />
             <p>です</p>
           </>
         )}
       </div>
     </div>
+  );
+};
+
+const TimeDisplay = ({ time }: { time: number }) => {
+  return (
+    <p className="text-2xl md:text-4xl lg:text-6xl text-gray-50 font-bold font-mono">
+      {formatTimeToString(time)}
+    </p>
   );
 };
 

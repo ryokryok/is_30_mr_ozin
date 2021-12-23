@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useRef } from "react";
+
 export function calcRemainingTime(isDebug: Boolean, birthDate: string) {
   const presentTime = new Date().getTime();
   const birthDayTime = isDebug
@@ -7,16 +9,34 @@ export function calcRemainingTime(isDebug: Boolean, birthDate: string) {
 }
 
 function convertMsToDateInfo(inputTime: number) {
-  const diffSec = Math.floor(inputTime / 1000);
-  const date = Math.floor(diffSec / 86400);
-  const hour = Math.floor(diffSec / 3600) % 24;
-  const min = Math.floor(diffSec / 60) % 60;
-  const sec = diffSec % 60;
-  return { date, hour, min, sec };
+  const diffSec = Math.floor(inputTime / 1);
+  const date = Math.floor(diffSec / 86400000);
+  const hour = Math.floor(diffSec / 3600000) % 24;
+  const min = Math.floor(diffSec / 60000) % 60;
+  const sec = (diffSec % 60000) / 1000;
+  return { date, hour, min, sec, diffSec };
 }
 
 export function formatTimeToString(ms: number) {
-  const { date, hour, min, sec } = convertMsToDateInfo(Math.abs(ms));
+  const { date, hour, min, sec, diffSec } = convertMsToDateInfo(Math.abs(ms));
   const hmsText = `${hour}時間${min}分${sec}秒`;
   return date === 0 ? hmsText : `${date}日${hmsText}`;
 }
+
+export const useAnimationFrame = (callback: () => void) => {
+  const requestRef = useRef<ReturnType<typeof requestAnimationFrame>>();
+
+  const animate = useCallback(() => {
+    callback();
+    requestRef.current = requestAnimationFrame(animate);
+  }, [callback]);
+
+  useEffect(() => {
+    requestRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (requestRef.current) {
+        return cancelAnimationFrame(requestRef.current);
+      }
+    };
+  }, [animate]);
+};
