@@ -52,12 +52,22 @@ export const CountDownTimer = ({
             <p>三十路になってから</p>
             <TimeDisplay time={time} />
             <p>経過しました。</p>
+            <TweetLink
+              text={`おじんさんが三十路になってから ${formatTimeToString(
+                time
+              )} 経過しました。`}
+            />
           </>
         ) : (
           <>
-            <p>20代の残り時間</p>
+            <p>20代である期間は</p>
             <TimeDisplay time={time} />
             <p>です</p>
+            <TweetLink
+              text={`おじんさんが20代である期間は ${formatTimeToString(
+                time
+              )} です`}
+            />
           </>
         )}
       </div>
@@ -76,15 +86,28 @@ const TimeDisplay = ({ time }: { time: number }) => {
 export const Links = () => {
   return (
     <IconContext.Provider value={{ size: "2em" }}>
-      <div className="p-4 text-xl text-blue-50 flex justify-center justify-items-center">
-        <a href={twitterUrl} target="_blank" rel="noreferrer" className="p-1">
-          <FaTwitter />
-        </a>
-
+      <div className="p-4 text-2xl text-white">
         <a href={gitHubUrl} target="_blank" rel="noreferrer" className="p-1">
           <FaGithub />
         </a>
       </div>
+    </IconContext.Provider>
+  );
+};
+
+const TweetLink = ({ text }: { text: string }) => {
+  return (
+    <IconContext.Provider value={{ size: "2em" }}>
+      <p>
+        <a
+          href={`https://twitter.com/intent/tweet?text=${text}&url=https://is-30-mr-ozin.vercel.app/`}
+          target="_blank"
+          rel="noreferrer"
+          className="p-1 underline underline-offset-2 text-blue-400 self-center"
+        >
+          <FaTwitter />
+        </a>
+      </p>
     </IconContext.Provider>
   );
 };
